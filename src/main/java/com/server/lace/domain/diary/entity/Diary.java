@@ -3,8 +3,8 @@ package com.server.lace.domain.diary.entity;
 import com.server.lace.domain.diary.entity.enums.Mood;
 import com.server.lace.domain.member.entity.Member;
 import lombok.*;
-
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,5 +31,8 @@ public class Diary {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Column(name = "createdAt")
+    private LocalDateTime createdAt;
 
 }
