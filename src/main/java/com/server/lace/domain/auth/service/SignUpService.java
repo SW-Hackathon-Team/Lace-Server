@@ -19,12 +19,12 @@ public class SignUpService {
 
     @Transactional
     public void execute(SignUpRequest signUpRequest) {
-        if (memberRepository.existsById(signUpRequest.getId())) {
+        if (memberRepository.existsByLoginId(signUpRequest.getLoginId())) {
             throw new DuplicateIdException();
         }
         Member member = Member.builder()
                 .memberId(0L)
-                .id(signUpRequest.getId())
+                .loginId(signUpRequest.getLoginId())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
                 .name(signUpRequest.getName())
                 .age(signUpRequest.getAge())

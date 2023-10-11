@@ -14,16 +14,16 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SignUpRequest {
 
-    @NotBlank(message = "아이디가 입력되지 않았습니다")
-    private String id;
+    @NotBlank(message = "아이디가 입력되지 않았습니다.")
+    private String loginId;
 
-    @NotBlank(message = "비밀번호가 입력되지 않았습니다")
+    @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
     private String password;
 
-    @NotBlank(message = "이름이 입력되지 않았습니다")
+    @NotBlank(message = "이름이 입력되지 않았습니다.")
     private String name;
 
-    @NotNull(message = "나이가 입력되지 않았습니다")
+    @NotNull(message = "나이가 입력되지 않았습니다.")
     private Integer age;
 
 }
