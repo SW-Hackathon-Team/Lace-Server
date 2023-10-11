@@ -6,6 +6,7 @@ import com.server.lace.global.security.handler.CustomAuthenticationEntryPointHan
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -29,6 +30,7 @@ public class SecurityConfig {
                 .httpBasic().disable();
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
