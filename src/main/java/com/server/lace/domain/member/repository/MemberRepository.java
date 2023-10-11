@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface MemberRepository extends CrudRepository<Member, UUID> {
 
     Optional<Member> findById(String id);
+    Boolean existsById(String id);
 
 }
