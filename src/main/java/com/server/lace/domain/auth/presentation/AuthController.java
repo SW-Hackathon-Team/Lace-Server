@@ -1,6 +1,9 @@
 package com.server.lace.domain.auth.presentation;
 
+import com.server.lace.domain.auth.presentation.dto.request.SignInRequest;
 import com.server.lace.domain.auth.presentation.dto.request.SignUpRequest;
+import com.server.lace.domain.auth.presentation.dto.response.TokenResponse;
+import com.server.lace.domain.auth.service.SignInService;
 import com.server.lace.domain.auth.service.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,11 +21,18 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final SignUpService signUpService;
+    private final SignInService signInService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         signUpService.execute(signUpRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<TokenResponse> signIn(@RequestBody @Valid SignInRequest signInRequest) {
+        TokenResponse tokenResponse = signInService.execute(signInRequest);
+        return ResponseEntity.ok(tokenResponse);
     }
 
 }
