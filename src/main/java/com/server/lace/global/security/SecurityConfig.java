@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/v1/user/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/diary/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/v1/diary/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()

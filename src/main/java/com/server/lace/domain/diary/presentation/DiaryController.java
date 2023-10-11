@@ -1,15 +1,13 @@
 package com.server.lace.domain.diary.presentation;
 
 import com.server.lace.domain.diary.presentation.dto.request.CreateDiaryRequest;
+import com.server.lace.domain.diary.presentation.dto.response.DiaryResponse;
 import com.server.lace.domain.diary.service.CreateDiaryService;
+import com.server.lace.domain.diary.service.GetDiaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
@@ -18,11 +16,18 @@ import javax.validation.Valid;
 public class DiaryController {
 
     private final CreateDiaryService createDiaryService;
+    private final GetDiaryService getDiaryService;
 
     @PostMapping
     public ResponseEntity<Void> createDiary(@RequestBody @Valid CreateDiaryRequest createDiaryRequest) {
         createDiaryService.execute(createDiaryRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DiaryResponse> readDiary(@PathVariable(name = "id") Long diaryId) {
+        DiaryResponse diary = getDiaryService.execute(diaryId);
+        return ResponseEntity.ok(diary);
     }
 
 }
