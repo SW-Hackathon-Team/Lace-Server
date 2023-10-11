@@ -27,7 +27,10 @@ spring:
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}
 
+
 jwt:
   accessSecret: ${ACCESS_SECRET}
   refreshSecret: ${REFRESH_SECRET}
 
+api-key :
+  chat-gpt : ${CHAT_GPT_API}
