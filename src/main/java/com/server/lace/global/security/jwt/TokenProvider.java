@@ -70,8 +70,12 @@ public class TokenProvider {
         }
     }
 
-    public ZonedDateTime getExpiredAtToken() {
+    public ZonedDateTime getAccessTokenExpiredAtToken() {
         return ZonedDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRE_TIME);
+    }
+
+    public ZonedDateTime getRefreshTokenExpiredAtToken() {
+        return ZonedDateTime.now().plusSeconds(REFRESH_TOKEN_EXPIRE_TIME);
     }
 
     public String getUserId(String token, String secret) {
