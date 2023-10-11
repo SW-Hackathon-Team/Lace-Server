@@ -13,6 +13,9 @@ public enum ErrorCode {
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
     EXPIRED_TOKEN("토큰이 만료되었습니다.", 419),
 
+    // AUTH
+    DUPLICATE_ID("이미 존재하는 id 입니다.", 400),
+
     // MEMBER
     MEMBER_NOT_FOUND("사용자를 찾을 수 없습니다.", 404);
 
