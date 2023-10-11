@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -29,7 +29,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<TokenResponse> signIn(@RequestBody @Valid SignInRequest signInRequest) {
         TokenResponse tokenResponse = signInService.execute(signInRequest);
         return ResponseEntity.ok(tokenResponse);
