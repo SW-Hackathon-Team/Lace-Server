@@ -27,24 +27,24 @@ public class SignInService {
 
     @Transactional
     public TokenResponse execute(SignInRequest signInRequest) {
-        Member member = memberRepository.findById(signInRequest.getId())
+        Member member = memberRepository.findByLoginId(signInRequest.getLoginId())
                 .orElseThrow(()->new MemberNotFoundException());
 
         if (!passwordEncoder.matches(signInRequest.getPassword(), member.getPassword())) {
             throw new MisMatchPasswordException();
         }
 
-        String accessToken = tokenProvider.generatedAccessToken(signInRequest.getId());
-        String refreshToken = tokenProvider.generatedRefreshToken(signInRequest.getId());
-        RefreshToken entityRedis = new RefreshToken(signInRequest.getId(), refreshToken, tokenProvider.getREFRESH_TOKEN_EXPIRE_TIME());
+        String accessToken = tokenProvider.generatedAccessToken(signInRequest.getLoginId());
+        String refreshToken = tokenProvider.generatedRefreshToken(signInRequest.getLoginId());
+        RefreshToken entityRedis = new RefreshToken(signInRequest.getLoginId(), refreshToken, tokenProvider.getREFRESH_TOKEN_EXPIRE_TIME());
 
         refreshTokenRepository.save(entityRedis);
 
         return TokenResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .accessTokenExpiredAt(tokenProvider.getAccessTokenExpiredAtToken().toLocalDateTime())
-                .refreshTokenExpiredAt(tokenProvider.getRefreshTokenExpiredAtToken().toLocalDateTime())
+                .accessTokenExpiredAt(tokenProvider.getExpiredAtAccessToken().toLocalDateTime())
+                .refreshTokenExpiredAt(tokenProvider.getExpiredAtRefreshToken().toLocalDateTime())
                 .build();
     }
 }

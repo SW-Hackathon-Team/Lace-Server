@@ -11,10 +11,10 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class SignInRequest {
 
-    @NotBlank(message = "아이디가 입력되지 않았습니다")
-    private String id;
+    @NotBlank(message = "아이디가 입력되지 않았습니다.")
+    private String loginId;
 
-    @NotBlank(message = "비밀번호가 입력되지 않았습니다")
+    @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
     private String password;
 
 }

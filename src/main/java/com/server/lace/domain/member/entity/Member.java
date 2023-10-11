@@ -14,8 +14,8 @@ public class Member {
     @Column(name = "member_id")
     private Long memberId;
 
-    @Column(name = "id")
-    private String id;
+    @Column(name = "login_id")
+    private String loginId;
 
     @Column(name = "password")
     private String password;
