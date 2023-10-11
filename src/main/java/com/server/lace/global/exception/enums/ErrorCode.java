@@ -21,7 +21,8 @@ public enum ErrorCode {
     MEMBER_NOT_FOUND("사용자를 찾을 수 없습니다.", 404),
 
     // DIARY
-    MOOD_NOT_FOUND("존재하지 않은 mood 입니다.", 404) ;
+    MOOD_NOT_FOUND("존재하지 않은 mood 입니다.", 404),
+    DIARY_NOT_FOUND("diary를 찾을 수 없습니다.", 404);
 
     private final String message;
     private final int status;
