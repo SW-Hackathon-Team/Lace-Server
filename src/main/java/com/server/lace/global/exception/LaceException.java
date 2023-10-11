@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LaceException extends RuntimeException {
 
-    private ErrorCode errorCode;
+    final ErrorCode errorCode;
 
 }
