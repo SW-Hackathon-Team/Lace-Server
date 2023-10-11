@@ -15,6 +15,7 @@ public enum ErrorCode {
 
     // AUTH
     DUPLICATE_ID("이미 존재하는 id 입니다.", 400),
+    MIS_MATCH_PASSWORD("비밀번호가 일치하지 않습니다.", 400),
 
     // MEMBER
     MEMBER_NOT_FOUND("사용자를 찾을 수 없습니다.", 404);
