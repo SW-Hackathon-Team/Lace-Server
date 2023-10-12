@@ -4,6 +4,7 @@ import com.server.lace.domain.diary.presentation.dto.request.CreateDiaryRequest;
 import com.server.lace.domain.diary.presentation.dto.request.UpdateDiaryRequest;
 import com.server.lace.domain.diary.presentation.dto.response.DiaryResponse;
 import com.server.lace.domain.diary.service.CreateDiaryService;
+import com.server.lace.domain.diary.service.DeleteDiaryService;
 import com.server.lace.domain.diary.service.GetDiaryService;
 import com.server.lace.domain.diary.service.UpdateDiaryService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class DiaryController {
     private final CreateDiaryService createDiaryService;
     private final GetDiaryService getDiaryService;
     private final UpdateDiaryService updateDiaryService;
+    private final DeleteDiaryService deleteDiaryService;
 
     @PostMapping
     public ResponseEntity<Void> createDiary(@RequestBody @Valid CreateDiaryRequest createDiaryRequest) {
@@ -36,6 +38,12 @@ public class DiaryController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateDiary(@PathVariable(name = "id") Long diaryId, @RequestBody @Valid UpdateDiaryRequest updateDiaryRequest) {
         updateDiaryService.execute(diaryId, updateDiaryRequest);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDiary(@PathVariable(name = "id") Long diaryId) {
+        deleteDiaryService.execute(diaryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
