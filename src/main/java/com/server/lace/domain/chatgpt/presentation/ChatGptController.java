@@ -4,11 +4,10 @@ package com.server.lace.domain.chatgpt.presentation;
 import com.server.lace.domain.chatgpt.presentation.dto.request.QuestionRequest;
 import com.server.lace.domain.chatgpt.presentation.dto.response.ChatGptResponse;
 import com.server.lace.domain.chatgpt.service.ChatGptService;
+import com.server.lace.domain.diary.presentation.dto.response.DiaryResponse;
+import com.server.lace.domain.diary.service.GetDiaryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +18,10 @@ import java.util.Locale;
 @RestController
 public class ChatGptController {
     private final ChatGptService chatGptService;
+    private final GetDiaryService getDiaryService;
 
     @PostMapping("/solution")
-    public ChatGptResponse sendQuestion(
-            Locale locale,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            @RequestBody QuestionRequest questionRequest) {
+    public ChatGptResponse sendQuestion(@RequestBody QuestionRequest questionRequest) {
         ChatGptResponse chatGptResponse = null;
         try {
             chatGptResponse = chatGptService.askQuestion(questionRequest);
@@ -33,5 +29,11 @@ public class ChatGptController {
 
         }
         return chatGptResponse;
+    }
+
+    @PostMapping("/analyze/{id}")
+    public ChatGptResponse analyzeDiary(@PathVariable("id") long id) {
+        DiaryResponse diaryResponse = getDiaryService.execute(id);
+        return chatGptService.diaryAnalyze(diaryResponse);
     }
 }
