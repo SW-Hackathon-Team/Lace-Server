@@ -18,10 +18,9 @@ public class GetDiaryService {
     private final MemberUtil memberUtil;
 
     @Transactional(readOnly = true)
-    public DiaryResponse execute(Long diaryId) {
+    public DiaryResponse execute() {
         Member member = memberUtil.currentMember();
-
-        Diary diary = diaryRepository.findByMemberAndDiaryId(member, diaryId)
+        Diary diary = diaryRepository.findByMember(member)
                 .orElseThrow(DiaryNotFoundException::new);
 
         return DiaryResponse.builder()

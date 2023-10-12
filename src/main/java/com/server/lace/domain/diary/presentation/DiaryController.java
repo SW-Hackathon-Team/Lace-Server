@@ -29,15 +29,15 @@ public class DiaryController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DiaryResponse> readDiary(@PathVariable(name = "id") Long diaryId) {
-        DiaryResponse diary = getDiaryService.execute(diaryId);
+    @GetMapping
+    public ResponseEntity<DiaryResponse> readDiary() {
+        DiaryResponse diary = getDiaryService.execute();
         return ResponseEntity.ok(diary);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateDiary(@PathVariable(name = "id") Long diaryId, @RequestBody @Valid UpdateDiaryRequest updateDiaryRequest) {
-        updateDiaryService.execute(diaryId, updateDiaryRequest);
+    @PatchMapping
+    public ResponseEntity<Void> updateDiary(@RequestBody @Valid UpdateDiaryRequest updateDiaryRequest) {
+        updateDiaryService.execute(updateDiaryRequest);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

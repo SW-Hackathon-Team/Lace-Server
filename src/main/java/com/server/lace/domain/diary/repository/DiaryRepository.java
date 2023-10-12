@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
-    Optional<Diary> findByMemberAndDiaryId(Member member, Long diaryId);
+    Optional<Diary> findByMember(Member member);
     void deleteByDiaryId(Long diaryId);
     boolean existsByMemberAndDiaryId(Member member, Long diaryId);
 }
