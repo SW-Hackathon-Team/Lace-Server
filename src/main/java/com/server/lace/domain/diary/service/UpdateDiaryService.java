@@ -18,9 +18,9 @@ public class UpdateDiaryService {
     private final MemberUtil memberUtil;
 
     @Transactional
-    public void execute(Long diaryId, UpdateDiaryRequest updateDiaryRequest) {
+    public void execute(UpdateDiaryRequest updateDiaryRequest) {
         Member member = memberUtil.currentMember();
-        Diary diary = diaryRepository.findByMemberAndDiaryId(member, diaryId)
+        Diary diary = diaryRepository.findByMember(member)
                 .orElseThrow(()->new DiaryNotFoundException());
 
         diary.update(updateDiaryRequest.getTitle(), updateDiaryRequest.getContent(), updateDiaryRequest.getMood());

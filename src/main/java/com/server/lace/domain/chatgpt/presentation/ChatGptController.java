@@ -31,9 +31,10 @@ public class ChatGptController {
         return chatGptResponse;
     }
 
-    @PostMapping("/analyze/{id}")
-    public ChatGptResponse analyzeDiary(@PathVariable("id") long id) {
-        DiaryResponse diaryResponse = getDiaryService.execute(id);
+    @PostMapping("/analyze")
+    public ChatGptResponse analyzeDiary() {
+        DiaryResponse diaryResponse = getDiaryService.execute();
         return chatGptService.diaryAnalyze(diaryResponse);
     }
+
 }
