@@ -20,8 +20,9 @@ public class GetDiaryService {
     @Transactional(readOnly = true)
     public DiaryResponse execute(Long diaryId) {
         Member member = memberUtil.currentMember();
+
         Diary diary = diaryRepository.findByMemberAndDiaryId(member, diaryId)
-                .orElseThrow(()->new DiaryNotFoundException());
+                .orElseThrow(DiaryNotFoundException::new);
 
         return DiaryResponse.builder()
                 .title(diary.getTitle())
