@@ -35,6 +35,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/v1/diary/**").authenticated()
                 .antMatchers(HttpMethod.PATCH, "/api/v1/diary/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/v1/diary/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/gpt/**").authenticated()
+
+
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
