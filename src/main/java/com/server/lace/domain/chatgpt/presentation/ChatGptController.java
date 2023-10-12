@@ -21,20 +21,20 @@ public class ChatGptController {
     private final GetDiaryService getDiaryService;
 
     @PostMapping("/solution")
-    public ChatGptResponse sendQuestion(@RequestBody QuestionRequest questionRequest) {
+    public String sendQuestion(@RequestBody QuestionRequest questionRequest) {
         ChatGptResponse chatGptResponse = null;
         try {
             chatGptResponse = chatGptService.askQuestion(questionRequest);
         } catch (Exception e) {
 
         }
-        return chatGptResponse;
+        return chatGptResponse.getChoices().get(0).getMessage().getContent();
     }
 
     @PostMapping("/analyze")
-    public ChatGptResponse analyzeDiary() {
+    public String analyzeDiary() {
         DiaryResponse diaryResponse = getDiaryService.execute();
-        return chatGptService.diaryAnalyze(diaryResponse);
+        return chatGptService.diaryAnalyze(diaryResponse).getChoices().get(0).getMessage().getContent();
     }
 
 }
