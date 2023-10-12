@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
     Optional<Diary> findByMemberAndDiaryId(Member member, Long diaryId);
+    void deleteByDiaryId(Long diaryId);
+    boolean existsByMemberAndDiaryId(Member member, Long diaryId);
 }
