@@ -15,7 +15,7 @@ public class MemberUtil {
 
     public Member currentMember() {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
-        return memberRepository.findById(id)
+        return memberRepository.findByLoginId(id)
                 .orElseThrow(() -> new MemberNotFoundException());
     }
 

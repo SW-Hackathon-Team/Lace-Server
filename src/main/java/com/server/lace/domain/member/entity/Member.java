@@ -2,7 +2,6 @@ package com.server.lace.domain.member.entity;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity @Getter
 @Builder
@@ -15,8 +14,8 @@ public class Member {
     @Column(name = "member_id")
     private Long memberId;
 
-    @Column(name = "id")
-    private String id;
+    @Column(name = "login_id")
+    private String loginId;
 
     @Column(name = "password")
     private String password;
